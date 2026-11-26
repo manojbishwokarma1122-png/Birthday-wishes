@@ -232,7 +232,7 @@ function celebrate(){
  candle.classList.add("off");
  message.classList.add("show");
  button.innerText="🎉 YOUR WISH IS BLOWN!";
-
+setTimeout(startLoveScene, 5000);
  for(let i=0;i<180;i++){
   const piece=document.createElement("div");
   piece.className="confetti";
@@ -244,6 +244,141 @@ function celebrate(){
 
   setTimeout(()=>piece.remove(),6500);
  }
+}
+</script>
+
+<!-- PREMIUM ROMANTIC SCENE -->
+<section id="loveScene">
+  <div class="love-glow"></div>
+
+  <div class="love-content">
+    <div class="big-heart">❤️</div>
+
+    <h1>YOU ARE MY FOREVER</h1>
+    <p>Every heartbeat whispers your name...</p>
+
+    <div class="roses">🌹 🌹 🌹</div>
+
+    <h2>I LOVE YOU ❤️</h2>
+    <p class="forever">FOREVER & ALWAYS</p>
+  </div>
+
+  <div id="roseRain"></div>
+</section>
+
+<style>
+#loveScene {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  overflow:hidden;
+  background:radial-gradient(circle,#51102e,#100514 75%);
+  color:white;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+}
+
+#loveScene.active {
+  display:flex;
+  animation:loveAppear 2s ease;
+}
+
+.love-content {
+  position:relative;
+  z-index:2;
+  padding:20px;
+}
+
+.big-heart {
+  font-size:110px;
+  animation:heartBeat 1s infinite;
+  filter:drop-shadow(0 0 30px #ff1744);
+}
+
+.love-content h1 {
+  color:#ffd98a;
+  font-size:clamp(25px,7vw,40px);
+  margin:20px 0;
+  text-shadow:0 0 20px gold;
+}
+
+.love-content p {
+  color:#ffd4e5;
+  letter-spacing:2px;
+  line-height:1.8;
+}
+
+.roses {
+  font-size:35px;
+  margin:30px;
+  animation:roseGlow 2s infinite alternate;
+}
+
+.love-content h2 {
+  color:#ff8ab7;
+  font-size:30px;
+  text-shadow:0 0 20px red;
+}
+
+.forever {
+  margin-top:15px;
+  font-size:12px;
+}
+
+.rose-petal {
+  position:absolute;
+  top:-40px;
+  font-size:24px;
+  animation:petalFall linear forwards;
+}
+
+.love-glow {
+  position:absolute;
+  width:250px;
+  height:250px;
+  background:#ff1744;
+  filter:blur(120px);
+  opacity:.35;
+}
+
+@keyframes heartBeat {
+  50% {transform:scale(1.2)}
+}
+
+@keyframes roseGlow {
+  to {filter:drop-shadow(0 0 20px pink)}
+}
+
+@keyframes petalFall {
+  to {
+    transform:translateY(110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+@keyframes loveAppear {
+  from {opacity:0;transform:scale(.7)}
+  to {opacity:1;transform:scale(1)}
+}
+</style>
+
+<script>
+function startLoveScene() {
+  document.getElementById("loveScene").classList.add("active");
+
+  setInterval(() => {
+    const petal = document.createElement("div");
+    petal.className = "rose-petal";
+    petal.innerHTML = "🌹";
+    petal.style.left = Math.random()*100 + "%";
+    petal.style.animationDuration = (4+Math.random()*4)+"s";
+
+    document.getElementById("roseRain").appendChild(petal);
+
+    setTimeout(()=>petal.remove(),8000);
+  },300);
 }
 </script>
 </body>
